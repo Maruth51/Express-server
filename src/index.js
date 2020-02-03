@@ -4,21 +4,22 @@ var bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
 
-const student = require("./students");
+const student = require("./student");
 app.get("/", (request, response) => {
   response.send("Hello");
 });
 
 app.get("/student/:id", (request, response) => {
-  const { id = "" } = request.params;
-  student.find(element => {
+  const { id = 0 } = request.params;
+  const req_studen = student.find(element => {
     if (parseInt(id, 10) === element.id) {
-      response.status(200).send(element);
+      return true;
     } else {
-      response.status(400);
+      return false;
     }
   });
-  response.status(200).json({ student });
+  console.log(req_studen);
+  response.status(200).send({ req_studen });
   //response.json(student);
 });
 
