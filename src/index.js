@@ -19,7 +19,17 @@ app.get("/student/:id", (request, response) => {
     }
   });
   console.log(req_studen);
-  response.status(200).send({ req_studen });
+  /* In JavaScript, a truthy value is a value that is 
+  considered true when encountered in a 
+  Boolean context. 
+  All values are truthy unless they are defined 
+  as falsy 
+  (i.e., except for false, 0, 0n, "", null, undefined, and NaN).*/
+  if (req_studen) {
+    response.status(200).send({ req_studen });
+  }
+  response.status(400).send("No data Found for the requested student Id");
+
   //response.json(student);
 });
 
